@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NinjaDomain.Classes", "Ninj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NinjaDomain.DataModel", "NinjaDomain.DataModel\NinjaDomain.DataModel.csproj", "{290FF3D2-02C9-4E42-8F54-ACF9A8A462AF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication", "ConsoleApplication\ConsoleApplication.csproj", "{5DD38248-D6DE-42E2-9AE1-DFEF4A79A026}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{290FF3D2-02C9-4E42-8F54-ACF9A8A462AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{290FF3D2-02C9-4E42-8F54-ACF9A8A462AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{290FF3D2-02C9-4E42-8F54-ACF9A8A462AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DD38248-D6DE-42E2-9AE1-DFEF4A79A026}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DD38248-D6DE-42E2-9AE1-DFEF4A79A026}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DD38248-D6DE-42E2-9AE1-DFEF4A79A026}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DD38248-D6DE-42E2-9AE1-DFEF4A79A026}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
