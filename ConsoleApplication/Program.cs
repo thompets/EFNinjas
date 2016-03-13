@@ -14,13 +14,28 @@ namespace ConsoleApplication
 			// Keeps EF from going through its db initialization process
 			Database.SetInitializer(new NullDatabaseInitializer<NinjaContext>());
 
-			// InsertNinja();
+			// DeleteNinja();
 			// InsertMultipleNinjas();
+			// InsertNinja();
+			// InsertNinjaWithEquipment();			
+			ProjectionQuery();
 			// QueryAndUpdateNinja();
 			// QueryAndUpdateNinjaDisconnected();
 			// RetrieveDataWithFind();
-			RetrieveDataWithStoredProc();
+			// RetrieveDataWithStoredProc();
+			// SimpleNinjaGraphQuery();
 			// SimpleNinjaQueries();
+		}		
+
+		private static void DeleteNinja()
+		{
+			using (var context = new NinjaContext())
+			{
+				context.Database.Log = Console.WriteLine;
+				var ninja = context.Ninjas.FirstOrDefault();
+				context.Ninjas.Remove(ninja);
+				context.SaveChanges();
+			}
 		}		
 
 		private static void InsertMultipleNinjas()
@@ -64,6 +79,53 @@ namespace ConsoleApplication
 				context.Database.Log = Console.WriteLine;
 				context.Ninjas.Add(ninja);
 				context.SaveChanges();
+			}
+		}
+
+		private static void InsertNinjaWithEquipment()
+		{
+			using (var context = new NinjaContext())
+			{
+				context.Database.Log = Console.WriteLine;
+
+				var ninja = new Ninja
+				{
+					Name = "Kacy Catanzaro",
+					ServedInOniwaban = false,
+					DateOfBirth = new DateTime(1990, 1, 14),
+					ClanId = 1
+				};
+
+				var muscles = new NinjaEquipment
+				{
+					Name = "Muscles",
+					Type = EquipmentType.Tool,
+				};
+
+				var spunk = new NinjaEquipment
+				{
+					Name = "Spunk",
+					Type = EquipmentType.Weapon
+				};
+
+				// since ef will start tracking ninja, adding items to ninja
+				// will automatically be tracked as well.
+				context.Ninjas.Add(ninja);
+				ninja.EquipmentOwned.Add(muscles);
+				ninja.EquipmentOwned.Add(spunk);
+
+				context.SaveChanges();
+			}
+		}
+
+		private static void ProjectionQuery()
+		{
+			using (var context = new NinjaContext())
+			{
+				context.Database.Log = Console.WriteLine;
+				var ninjas = context.Ninjas
+					.Select(n => new { n.Name, n.DateOfBirth, n.EquipmentOwned })
+					.ToList();
 			}
 		}
 
@@ -127,6 +189,24 @@ namespace ConsoleApplication
 				//{
 				//	Console.WriteLine(ninja.Name);
 				//}
+			}
+		}
+
+		private static void SimpleNinjaGraphQuery()
+		{
+			using (var context = new NinjaContext())
+			{
+				context.Database.Log = Console.WriteLine;
+
+				// example of Eager Loading
+				//var ninja = context.Ninjas.Include(n => n.EquipmentOwned)
+				//	.FirstOrDefault(n => n.Name.StartsWith("Kacy"));
+
+				// example of Explicit Loading
+				var ninja = context.Ninjas.FirstOrDefault(n => n.Name.StartsWith("Kacy"));
+				Console.WriteLine("Ninja Retrieved: " + ninja.Name);
+				context.Entry(ninja).Collection(n => n.EquipmentOwned).Load();
+			
 			}
 		}
 
