@@ -18,7 +18,7 @@ namespace ConsoleApplication
 			// InsertMultipleNinjas();
 			// InsertNinja();
 			// InsertNinjaWithEquipment();			
-			ProjectionQuery();
+			// ProjectionQuery();
 			// QueryAndUpdateNinja();
 			// QueryAndUpdateNinjaDisconnected();
 			// RetrieveDataWithFind();
